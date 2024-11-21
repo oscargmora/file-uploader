@@ -13,7 +13,7 @@ block content
             each error in errors
                 li= error.msg
 
-    if folder.id !== 1
+    if folder.parentId !== null
         form(action=`/homepage/rename-folder/${folder.id}` method="post") 
             div
                 label(for="folder") Rename Folder: 
@@ -58,3 +58,7 @@ block content
         button(type="submit") Submit
 
     a(href="/login/logout") LOG OUT 
+    br
+    a(href=`/homepage/update-user/${folder.id}`) UPDATE USER
+    br
+    a(href=`/homepage/delete-user/${folder.id}`) DELETE USER

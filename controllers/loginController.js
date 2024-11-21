@@ -79,7 +79,7 @@ const loginPost = [
 				if (err) {
 					return next(err);
 				}
-				return res.redirect("/homepage/1");
+				return res.redirect("/homepage");
 			});
 		})(req, res, next);
 	}),

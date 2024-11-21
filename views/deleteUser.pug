@@ -1,0 +1,14 @@
+extends ./partials/layout
+
+block content 
+
+    h1 #{title}
+
+    p Are you sure you want to delete your account?
+
+    p Deleting your account deletes all your files with no way of getting them back!
+
+    a(href=`/homepage/${folder.id}`) Go Back 
+
+    form(action=`/homepage/delete-user/${folder.id}`, method="post") 
+        button(type="submit") Delete

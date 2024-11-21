@@ -1,0 +1,21 @@
+extends ./partials/layout
+
+block content 
+
+    h1 #{title}
+    h2 Update User
+
+    if errors && errors.authentication 
+        ul 
+            each error in errors.authentication 
+                li= error
+
+    form(action="/homepage/update-user", method="post") 
+        div
+            label(for="firstName") First Name:
+            input#firstName(type="text", name="firstName", value= inputs ? inputs.firstName : '', minlength='1', maxlength='20', required, autofocus, autocomplete='on')
+            label(for="lastName") Last Name:
+            input#lastName(type="text", name="lastName", value= inputs ? inputs.lastName : '', minlength='1', maxlength='20', required, autocomplete='on')
+        button(type="submit") Submit
+
+    a(href="/homepage") Back to Homepage 
