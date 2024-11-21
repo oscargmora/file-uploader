@@ -1,0 +1,14 @@
+extends ./partials/layout
+
+block content 
+
+    h1 #{title}
+
+    p Are you sure you want to delete #{folder.name}?
+
+    p Deleting this folder also deletes all its inner contents! 
+
+    a(href=`/homepage/${folder.id}`) Go Back 
+
+    form(action=`/homepage/delete-folder/${folder.id}`, method="post") 
+        button(type="submit") Delete

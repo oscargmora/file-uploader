@@ -1,0 +1,21 @@
+extends ./partials/layout
+
+block content 
+
+    h1 #{title}
+    h2 Log In
+
+    if errors && errors.authentication 
+        ul 
+            each error in errors.authentication
+                li= error
+
+    form(action="/login", method="post") 
+        div
+            label(for="email") Email: 
+            input#email(type="email", name='email', value= inputs ? inputs.email : '', required, autofocus)
+            label(for='password') Password:
+            input#password(type='password', name='password', required)
+        button(type="submit") Submit
+
+    a(href="/") Back to Landing Page 

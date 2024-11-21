@@ -1,0 +1,60 @@
+extends ./partials/layout
+
+block content 
+
+    h1 #{title}
+
+    h2 Welcome #{firstName}
+
+    h3 You are now in your #{folder.name} folder
+
+    if errors
+        ul 
+            each error in errors
+                li= error.msg
+
+    if folder.id !== 1
+        form(action=`/homepage/rename-folder/${folder.id}` method="post") 
+            div
+                label(for="folder") Rename Folder: 
+                input#folder(type="text", name='folder', value= inputs ? inputs.folder : '')
+            button(type="submit") Submit
+
+        a(href=`delete-folder/${folder.id}`)= 'Delete Folder'
+
+    if folder.children
+        ul 
+            each child in folder.children 
+                li
+                    a(href=`/homepage/${child.id}`)= child.name
+
+    if folder.files 
+        ul 
+            each file in folder.files 
+                li #{file.name}
+                    form(action=`/homepage/${folder.id}/rename-file/${file.id}` method="post") 
+                        div
+                            label(for="file") Rename File: 
+                            input#file(type="text", name='file')
+                        button(type="submit") Submit
+                    
+                    a(href=file.url target='_blank') Download File
+                    br
+                    a(href=`/homepage/${folder.id}/delete-file/${file.id}`)= 'Delete File'
+
+    if folder.parent
+        a(href=`/homepage/${folder.parent.id}`)= `Go back to your ${folder.parent.name} folder`
+
+    form(action=`/homepage/create-folder/${folder.id}` method="post") 
+        div
+            label(for="folder") New Folder Name: 
+            input#folder(type="text", name='folder', value= inputs ? inputs.folder : '')
+        button(type="submit") Submit
+
+    form(action=`/homepage/upload-file/${folder.id}` method="post" enctype="multipart/form-data") 
+        div
+            label(for="file") New File: 
+            input#file(type="file", name='file')
+        button(type="submit") Submit
+
+    a(href="/login/logout") LOG OUT 
