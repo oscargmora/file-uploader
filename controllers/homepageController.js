@@ -365,10 +365,6 @@ async function homepageDeleteFilePost(req, res) {
 
 	const folderId = parseInt(req.params.folderId);
 
-	const fileExtension = getFileExtension(file.mimeType);
-
-	const fullPublicId = file.id + fileExtension;
-
 	try {
 		await cloudinary.uploader.destroy(file.id, { resource_type: "raw" });
 	} catch (err) {
